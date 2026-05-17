@@ -7540,6 +7540,59 @@ a.anchor-link {
 <span class="sd">        &gt;&gt; Added ['C0_SE', 'C1_SE', 'C2_SE' and 'C3_SE']</span>
 
 <span class="sd">Author: Chance Fleeting</span>
+
+<span class="sd">
+Bipolar to Monopolar LFP Power Estimation Companion
+---------------------------------------------------
+This notebook provides an interactive interface to help
+you estimate Monopolar LFP Powers from Bipolar LFP Power
+using the weights and model described in Fleeting et al.,
+2025.
+
+Input type: CSV
+    >> Must contain ['C0-C3', 'C1-C2', and 'C2-C3'] in dB PSD (labeled at head of each column)
+    >> If it contains ['C0', 'C1', 'C2' and 'C3'], it will also run validation.
+
+Output type: CSV
+    >> Saved locally to input file with suffix "_estimated"
+    >> Conservative format. 
+        >> Removed ['C0-C3', 'C1-C2', and 'C2-C3']
+        >> Added ['C0', 'C1', 'C2' and 'C3']
+        >> Added ['C0_SE', 'C1_SE', 'C2_SE' and 'C3_SE']
+
+Author: Chance Fleeting
+
+
+Example Workflow
+----------------
+A clinician or researcher performing postoperative LFP analysis could
+apply the model as follows:
+
+    1. Record or export bipolar PSD measurements from the sensing-enabled
+       DBS system (e.g., BrainSense survey output).
+
+    2. Extract bipolar powers in dB for:
+            ['C0-C3', 'C1-C2', 'C2-C3']
+
+       using the desired frequency band or spectral metric.
+
+    3. Save these values in CSV format with the required column names.
+
+    4. Run this script to estimate monopolar contact powers:
+            ['C0', 'C1', 'C2', 'C3']
+
+    5. Review the estimated monopolar distribution as if monopolar
+       powers had been recorded directly.
+
+No additional preprocessing is required prior to model application.
+Because the model operates linearly in relative dB space, scaling or
+band-selection choices applied to the bipolar inputs translate directly
+to the monopolar estimates. Similarly, because the model was trained
+across canonical frequency bands, it is agnostic to the specific band
+power extraction method used, provided the inputs are expressed as PSD
+power in dB.
+</span>
+    
 <span class="sd">"""</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
